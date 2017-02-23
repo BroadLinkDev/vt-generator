@@ -6,7 +6,7 @@ Broadlink VT application generator
 ## Installation
 
 ```bash
-  $ npm install -g vt-generator
+  $ sudo npm install -g vt-generator
 ```
 
 ## Quick Start
@@ -16,7 +16,7 @@ The quickest way to get started building a VT application is to utilize the exec
 Create the app:
 
 ```bash
-  $ vtvt /tem && cd /tem/Script
+  $ vtvt ./tem && cd ./tem/Script
 ```
 
 Test your app:
