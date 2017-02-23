@@ -38,6 +38,14 @@ This generator can also be further configured with the following command line fl
 
 ```
 
+## Notice
+
+`device.config`,`Script/main.js` and `Script/hzBuffer.js` are created and maintained by VT container. Local modifications of these files **won't** work in the real device. Please open pull requests or issues when you have any question.
+
+`Script/server.js` is only a sample for local testing, custimze it as you like.
+
+The `app.js` defines four functions: `onLaunch`, `onDeviceControl`, `onUploadData` and `onSubscribe`, which are called by the `main.js` in response to important events in the lifetime of your app.
+
 ## License
 
 [MIT](LICENSE)
