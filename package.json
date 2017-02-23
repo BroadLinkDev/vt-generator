@@ -1,0 +1,40 @@
+{
+  "name": "vt-generator",
+  "description": "Broadlink VT application generator",
+  "version": "0.1.0",
+  "author": "zhiwei wang <zhiwei.wang@broadlink.com.cn>",
+  "contributors": [],
+  "keywords": [],
+  "repository": "broadlinkdev/vt-generator",
+  "license": "MIT",
+  "dependencies": {
+    "commander": "2.9.0",
+    "mkdirp": "0.5.1",
+    "sorted-object": "2.0.1"
+  },
+  "main": "bin/vtvt",
+  "preferGlobal": true,
+  "bin": {
+    "vtvt": "./bin/vtvt"
+  },
+  "devDependencies": {
+    "chai": "^3.5.0",
+    "mocha": "^2.5.3",
+    "rimraf": "2.5.4",
+    "supertest": "1.2.0",
+    "validate-npm-package-name": "2.2.2"
+  },
+  "engines": {
+    "node": ">= 0.10"
+  },
+  "files": [
+    "LICENSE",
+    "bin/",
+    "templates/"
+  ],
+  "scripts": {
+    "test": "mocha --reporter spec --bail --check-leaks test/",
+    "test-ci": "mocha --reporter spec --check-leaks test/"
+  },
+  "homepage": "https://github.com/BroadLinkDev/vt-generator#readme"
+}
