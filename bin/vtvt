@@ -125,14 +125,13 @@ function createApplication(app_name, path) {
     console.log();
   }
 
-  copy_template("device.config", "device.config")
-
   mkdir(path, function(){
-    mkdir(path + '/VT', function(){
-      copy_template("app.js", "VT/app.js")
-      copy_template("hzBuffer.js", "VT/hzBuffer.js");
-      copy_template("main.js", "VT/main.js");
-      copy_template("server.js", "VT/server.js");
+    copy_template("device.config", path + "/device.config")
+    mkdir(path + '/Script', function(){
+      copy_template('Script/app.js', path + '/Script/app.js')
+      copy_template('Script/hzBuffer.js', path + "/Script/hzBuffer.js");
+      copy_template("Script/main.js", path + "/Script/main.js");
+      copy_template("Script/server.js", path + "/Script/server.js");
       complete();
     });
 

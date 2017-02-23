@@ -41,22 +41,25 @@ const deSerializeBuf = function(buf) {
 };
 
 const serializedBuf = function(msg_type, obj) {
-  // const json = JSON.stringify(obj)
-  // var jsonbuf = Buffer.from(json);
-var data = obj.data
-try {
-  if (Buffer.isBuffer(data) == false) {
-    var err = new Error('Data must be buffer')
-    throw err
-  }
-} catch (err) {
-  console.log(err);
-}
 
-if (msg_type != MsgType.HeartBeatQ) {
-  var base64Obj = {"data" : data.toString('base64'), "error" : obj.errorCode};
-  jsonbuf = Buffer.from(JSON.stringify(base64Obj))
-}
+  var jsonbuf;
+
+  if (msg_type != MsgType.HeartBeatQ) {
+    var data = obj.data
+    try {
+      if (Buffer.isBuffer(data) == false) {
+        var err = new Error('Data must be buffer')
+        throw err
+      }
+    } catch (err) {
+      console.log(err);
+    }
+    var base64Obj = {"data" : data.toString('base64'), "error" : obj.errorCode};
+    jsonbuf = Buffer.from(JSON.stringify(base64Obj))
+  }else {
+    const json = JSON.stringify(obj)
+    jsonbuf = Buffer.from(json);
+  }
 
   const buf = Buffer.alloc(headerLen, 0);
   const magic_code = 0x5aa5a55a;
@@ -109,21 +112,28 @@ function parse(buf) {
     // drop error data
     return [null, headerLen + dataLen];
   }
-  const resBuf = Buffer.allocUnsafe(dataLen)
-  buf.copy(resBuf, 0, headerLen, (headerLen + dataLen))
-  var obj = {
-    msgType: convertToMsg(buf.readUInt16LE(6)),
-    data: resBuf
+
+  var jsonStr = buf.toString('utf8' ,headerLen, (headerLen + dataLen));
+  var msgType = convertToMsg(buf.readUInt16LE(6));
+  try {
+    const d_obj = JSON.parse(jsonStr);
+    if (msgType == MsgType.HeartBeatQ) {
+      const obj = {
+        msgType: msgType,
+        data: d_obj
+      }
+      return [obj, headerLen + dataLen];
+    }
+
+    const dataBuf = Buffer.from(d_obj.data, 'base64')
+    const obj = {
+      msgType: msgType,
+      data: dataBuf
+    }
+    return [obj, headerLen + dataLen];
+  } catch (e) {
+    return [null, headerLen + dataLen];
   }
-  return [obj, headerLen + dataLen]
-  // const jsonStr = buf.toString('utf8' ,headerLen, (headerLen + dataLen));
-  // try {
-  //   var obj = JSON.parse(jsonStr);
-  //   obj.msgType = convertToMsg(buf.readUInt16LE(6));
-  //   return [obj, headerLen + dataLen];
-  // } catch (e) {
-  //   return [null, headerLen + dataLen];
-  // }
 };
 
 function convertToMsg(value) {

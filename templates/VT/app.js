@@ -5,15 +5,15 @@ module.exports = {
     console.log("on Launch");
   },
 
-  onDeviceControl: function(obj) {
-    console.log("revice device control command: " + obj);
+  onDeviceControl: function(str) {
+    console.log("revice device control command: " + str);
   },
 
-  onUploadData: function(obj) {
-    console.log("revice uploading device data command: " + obj);
+  onUploadData: function(str) {
+    console.log("revice uploading device data command: " + str);
   },
 
-  onSubscribe: function(obj) {
-    console.log("revice subscribing device command: " + obj);
+  onSubscribe: function(str) {
+    console.log("revice subscribing device command: " + str);
   }
 }

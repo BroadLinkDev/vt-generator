@@ -6,6 +6,7 @@ const PORT = 16640;
 
 const client = new net.Socket();
 const hzBuffer = require('./hzBuffer.js');
+const MsgType = hzBuffer.MsgType;
 const fs = require('fs');
 
 const app = require('./app.js')
@@ -26,7 +27,7 @@ fs.readFile(__dirname + '/../device.config', 'utf8', function (err, data) {
   }
 });
 
-const MsgType = hzBuffer.MsgType;
+
 
 app.onLaunch()
 
@@ -70,15 +71,15 @@ function handle(obj) {
     noHBTimes = 0;
   }
   if (obj.msgType == MsgType.ControlQ) {
-    const response = app.onDeviceControl(obj)
+    const response = app.onDeviceControl(obj.data)
     client.write(hzBuffer.serializedBuf(MsgType.ControlP, response));
   }
   if (obj.msgType == MsgType.DataUploadQ) {
-    const response = app.onUploadData(obj)
+    const response = app.onUploadData(obj.data)
     client.write(hzBuffer.serializedBuf(MsgType.DataUploadP, response));
   }
   if (obj.msgType == MsgType.DeviceSubscribeQ) {
-    const response = app.onSubscribe(obj)
+    const response = app.onSubscribe(obj.data)
     client.write(hzBuffer.serializedBuf(MsgType.DeviceSubscribeP, response));
   }
 }
