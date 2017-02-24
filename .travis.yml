@@ -1,0 +1,14 @@
+language: node_js
+node_js:
+  - stable
+cache:
+  directories:
+    - node_modules
+before_install:
+  # Update Node.js modules
+  - "test ! -d node_modules || npm prune"
+  - "test ! -d node_modules || npm rebuild"
+script: "npm run-script test-ci"
+
+# Send coverage data to Coveralls
+after_script: "cat coverage/lcov.info | node_modules/coveralls/bin/coveralls.js"
