@@ -3,7 +3,7 @@ vt-generator
 
 Broadlink VT application generator
 
-[![Build Status](https://travis-ci.org/BroadLinkDev/vt-generator.svg?branch=master)](https://travis-ci.org/BroadLinkDev/vt-generator)
+[![Build Status](https://travis-ci.org/BroadLinkDev/vt-generator.svg?branch=master)](https://travis-ci.org/BroadLinkDev/vt-generator) [![Coverage Status](https://coveralls.io/repos/github/BroadLinkDev/vt-generator/badge.svg?branch=master)](https://coveralls.io/github/BroadLinkDev/vt-generator?branch=master)
 ## Installation
 
 ```bash
