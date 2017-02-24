@@ -6,7 +6,7 @@ Broadlink VT application generator
 ## Installation
 
 ```bash
-  $ npm install -g vt-generator
+  $ sudo npm install -g vt-generator
 ```
 
 ## Quick Start
@@ -16,7 +16,7 @@ The quickest way to get started building a VT application is to utilize the exec
 Create the app:
 
 ```bash
-  $ vtvt /tem && cd /tem/Script
+  $ vtvt ./tem && cd ./tem/Script
 ```
 
 Test your app:
@@ -37,6 +37,14 @@ This generator can also be further configured with the following command line fl
 -f, --force         force on non-empty directory
 
 ```
+
+## Notice
+
+`device.config`,`Script/main.js` and `Script/hzBuffer.js` are created and maintained by VT container. Local modifications of these files **won't** work in the real device. Please open pull requests or issues when you have any question.
+
+`Script/server.js` is only a sample for local testing, custimze it as you like.
+
+The `app.js` defines four functions: `onLaunch`, `onDeviceControl`, `onUploadData` and `onSubscribe`, which are called by the `main.js` in response to important events in the lifetime of your app.
 
 ## License
 
